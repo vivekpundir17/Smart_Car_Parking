@@ -54,24 +54,6 @@ void loop()
   Serial.println("d5 = " + String(d5) + "cm");
   //display all sensor distance on serial monitor
   
-/* For below command
-barierState is used to ensure that the barrier either is closed or open for enter or exit
-
-So while barrierState is:
-0	barrier is closed
--1	barrier is open for enter
-1	barrier is open for exit
--2	barrier is closed after the vehicle passed the barrier gate (enter)
-2	barrier is closed after the vehicle passed the barrier gate (exit)
-
-after it reached to -2 or 2 value, it will reset back to 0 when there is no vehicle detected
-by two sensor.
-
-For parkingAvailable, we set to 3 as we have 3 parking lot only
-so it will automatically update while the barrier is open.
-Therefore, the barrier will not be open while there is no more parking lot available.
-*/
-  
 if (barrierState == 0)
 {
   if (d4<100 && d5>=100 && parkingAvailable>0)
@@ -118,15 +100,7 @@ else if (barrierState == 2)
   }
 }  
 
-/*
-The command below is used to print out the information on the LCD Screen
-For the first row of the LCD Screen, it will show the number of parking lot available
-While it full, it will show Parking Full
 
-For the second row of the LCD Screen, it will show which parking lot is still empty
-This allow users to know which parking lot is still available without wasting time
-to find an empty parking lot.
-*/  
 lcd.setCursor(0,0);
 if (parkingAvailable == 0)
 {
